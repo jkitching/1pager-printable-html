@@ -1,5 +1,7 @@
 # 1pager-printable-html
 
+![Screenshot of 1pager template in browser next to printed PDF document](screenshot.png)
+
 A simple HTML + CSS template for creating a one-page document primarily for printing (to paper or PDF).  Useful for creating layout-sensitive documents such as resumes, without resorting to LaTeX or publishing software like Adobe InDesign.
 
 ## View
