@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>1pager: your title here</title>
+<style type="text/css">
+/* To choose letter paper instead of A4 paper, swap the order of the
+ * two pairs of lines below ("aspect-ratio" and "size" properties). */
+
+/**
+ * When the viewport width is 50em, the default font size is equivalent
+ * to 2vw.  These values can be used as the transition point between
+ * fixed and fluid layouts to ensure the font size does not jump:
+ *
+ * https://www.smashingmagazine.com/2016/05/fluid-typography/
+ *
+ * However, instead of setting based on viewport size (which comes along with
+ * the hassle of dealing with scrollbar width), use a container query and
+ * cqw units, which are stable regardless of scrollbar presence.
+ *
+ * Container queries and units are relatively new (introduced to modern
+ * browsers circa late 2022), so if putting this HTML up on the web, it
+ * might be a good idea to use JavaScript to measure scrollbar width and
+ * store in a CSS variable for use in font-size calculation:
+ *
+ * https://github.com/burntcustard/scrollbar-css-var/
+ */
+html {
+    background: #eee;
+    padding: 2em;
+    margin: 0;
+    container-type: inline-size;
+}
+body {
+    width: 50em;
+    background: white;
+    margin: 0 auto;
+    box-shadow: 0 0 0 1px #ccc, 0px 1px 4px #ccc;
+    aspect-ratio: 8.5 / 11;  /* Letter */
+    aspect-ratio: 210 / 297;  /* A4 */
+}
+@container (max-width: 50em) {
+    body {
+        width: auto;
+        /* Fallback for browsers which don't support cqw.  This takes the page
+         * left/right gutters into account (from padding: 2em above), but does
+         * not discount the scrollbar width in its calculation.  Text size will
+         * be slightly off. */
+        font-size: calc((100vw - 4em) / 50);
+        font-size: 2cqw;
+    }
+}
+@media print {
+    @page {
+        size: letter portrait;  /* Letter */
+        size: A4 portrait;  /* A4 */
+        /* Needed to print without margins in headless mode, but prevents
+         * adding margins with print dialog (i.e. None and Default both
+         * result in no margins).  Custom margin setting still works. */
+        margin: 0;
+    }
+    html {
+        width: auto;
+        margin: 0;
+        padding: 0;
+        /* 2vw is equivalent to 2cqw here. */
+        font-size: 2vw;
+        /* Prevent PDF print from messing with colours */
+        -webkit-print-color-adjust: exact;
+        color-adjust: exact;
+    }
+}
+
+/* Your custom CSS goes here. */
+main {
+    font-family: "Noto Serif", serif;
+    padding: 2em;
+    color: #222;
+}
+</style>
+</head>
+<body>
+
+<main>
+1pager template content goes here
+</main>
+
+</body>
+</html>
